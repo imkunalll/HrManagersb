@@ -1,31 +1,51 @@
 pipeline {
     agent any
-
     stages {
-        
-        
-        stage('Build') {
+        stage('Clone sources') {
             steps {
-                echo 'building'
+                git url: 'https://github.com/imkunalll/HrManagersb.git'
+            }
+        }
+        stage('SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                   sh'mvn sonar:sonar -Dsonar.projectKey=HrManagersb -Dsonar.host.url=http://localhost:9000 -Dsonar.login=94dde6e37848ed874473de3c77328df87fecae31'
+                }
+            }
+        }
+        stage("Quality gate") {
+            steps {
+                waitForQualityGate abortPipeline: true
+            }
+        }
+        stage('Requirement') {
+            steps {
+                echo 'Requirement gathering'
             }
         }
         
-        stage('Deploy') {
+        stage('Planning') {
             steps {
-                echo 'Deploying'
+                echo 'Planning'
             }
         }
         
-        stage('Test') {
+        stage('Designing') {
+            steps {
+                echo 'Designing'
+            }
+        }
+        
+        stage('Developing') {
+            steps {
+                echo 'Developing'
+            }
+        }
+      
+        stage('Testing') {
             steps {
                 echo 'Testing'
             }
         }
-      
-        stage('Release') {
-            steps {
-                echo 'Realeasing'
-            }
-        }
-  }
-  }
+    }
+    }

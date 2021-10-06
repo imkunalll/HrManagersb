@@ -9,7 +9,7 @@ pipeline {
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                   bat "mvn sonar:sonar -Dsonar.projectKey=HrManagersb -Dsonar.host.url=http://localhost:9000 -Dsonar.login=94dde6e37848ed874473de3c77328df87fecae31"
+                   bat 'mvn sonar:sonar'
                 }
             }
         }

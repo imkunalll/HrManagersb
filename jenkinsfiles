@@ -3,13 +3,13 @@ pipeline {
     stages {
         stage('Clone sources') {
             steps {
-                git url: 'https://github.com/tkgregory/sonarqube-jacoco-code-coverage.git'
+                git url: 'https://github.com/imkunalll/HrManagersb.git'
             }
         }
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh "./gradlew sonarqube"
+                    sh "mvn sonar:sonar -Dsonar.projectKey=HrManagersb -Dsonar.host.url=http://localhost:9000 -Dsonar.login=94dde6e37848ed874473de3c77328df87fecae31"
                 }
             }
         }

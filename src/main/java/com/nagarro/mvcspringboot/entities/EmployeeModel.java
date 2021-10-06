@@ -1,6 +1,8 @@
 package com.nagarro.mvcspringboot.entities;
 
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,18 +10,19 @@ import javax.persistence.Id;
 
 
 @Entity
-public class EmployeeModel {
+public class EmployeeModel implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long employeeCode;
+	private long employeeCode;
 	private String employeeName;
 	private String location;
 	private String email;
 	private String dob;
 
 
-	public EmployeeModel(Long employeeCode, String employeeName, String location, String email, String dob) {
+	public EmployeeModel(long employeeCode, String employeeName, String location, String email, String dob) {
 		this.employeeCode = employeeCode;
 		this.employeeName = employeeName;
 		this.location = location;
@@ -30,11 +33,11 @@ public class EmployeeModel {
 	public EmployeeModel() {
 	}
 
-	public Long getEmployeeCode() {
+	public long getEmployeeCode() {
 		return employeeCode;
 	}
 
-	public void setEmployeeCode(Long employeeCode) {
+	public void setEmployeeCode(long employeeCode) {
 		this.employeeCode = employeeCode;
 	}
 

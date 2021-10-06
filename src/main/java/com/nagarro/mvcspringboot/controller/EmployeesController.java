@@ -56,15 +56,23 @@ public class EmployeesController {
 		return employeeRepository.save(employee);
 	}
 	
-	@PutMapping("/employees/{id}")
-	public EmployeeModel updateEmployee(@PathVariable(name="id") Long id, @RequestBody EmployeeModel employeeDetails)
+	@GetMapping("/employee/{id}")
+	public EmployeeModel getEmployee(@PathVariable(name="id") Long id)
 	{
-		EmployeeModel existingEmployee=employeeRepository.getById(id);
+//		EmployeeModel existingEmployee=employeeRepository.getById((long) 1);
+		return employeeRepository.findById(id).get();
+	}
+	
+	@PostMapping("/employees/{id}")
+	public boolean updateEmployee(@PathVariable(name="id") Long id, @RequestBody EmployeeModel employeeDetails)
+	{
+		EmployeeModel existingEmployee=employeeRepository.findById(id).get();
 		existingEmployee.setEmployeeName(employeeDetails.getEmployeeName());
 		existingEmployee.setLocation(employeeDetails.getLocation());
 		existingEmployee.setEmail(employeeDetails.getEmail());
 		existingEmployee.setDob(employeeDetails.getDob());
-		return employeeRepository.save(existingEmployee);
+		employeeRepository.save(existingEmployee);
+		return true;
 	}
 	
 	@DeleteMapping("/employees/{id}")

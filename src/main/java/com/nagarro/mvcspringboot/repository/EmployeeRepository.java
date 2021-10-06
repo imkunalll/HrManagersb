@@ -7,5 +7,4 @@ import com.nagarro.mvcspringboot.entities.EmployeeModel;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<EmployeeModel, Long> {
-
 }
